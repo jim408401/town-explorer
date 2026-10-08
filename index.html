@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>小鎮漫步 Town Explorer</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div id="hud">
+      <h1>小鎮漫步</h1>
+      <p class="desktop">WASD／方向鍵 移動　Shift 奔跑<br />拖曳滑鼠或 Q／E 轉視角　滾輪 縮放<br />空白鍵 和居民聊天　M 靜音</p>
+      <p class="touch">左半邊拖曳移動，右半邊拖曳轉視角</p>
+    </div>
+    <button id="mute" type="button" aria-label="靜音切換">🔊</button>
+    <div id="prompt"></div>
+    <div id="bubble"><strong id="bubble-name"></strong><span id="bubble-text"></span></div>
+    <button id="talk" type="button">聊天</button>
+    <div id="joystick"><div id="knob"></div></div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
