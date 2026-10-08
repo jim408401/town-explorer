@@ -1,18 +1,22 @@
 # Town Explorer
 
-A small low-poly, cartoon-style town you can wander around in the browser.
+A small seaside town drawn in a hand-inked, anime-style look that you can wander around in the browser.
 Built with [Three.js](https://threejs.org/) and [Vite](https://vitejs.dev/), inspired by the mood of [Messenger](https://messenger.abeto.co/).
 
 ![Screenshot](docs/screenshot.png)
 
 ## Features
 
-- A medium-sized island town: fountain plaza with market stalls, parks, a pier with a little boat, and a lighthouse
-- Chubby low-poly character with a smooth third-person follow camera
+- Ink-outline post-processing (normal + depth edge detection), flat two-tone cel shading and paper grain
+- "Tiny planet" horizon: the world bends away from the player in the vertex shader
+- Dense streets: asphalt roads with lane markings and zebra crossings, sidewalks, utility poles with sagging wires,
+  vending machines, mailboxes, bollards and road signs
+- Concrete apartment blocks with balconies, air conditioners, rooftop water tanks and Chinese shop signs
+- A square with a fountain, pocket parks, a pier with a boat and a lighthouse on the shore
 - Villagers who wander the streets and stop to chat when you walk up to them
 - Procedural ambience (waves, birds, a quiet music-box melody, footsteps) with a mute toggle
-- Everything is generated in code: no external models, textures or audio files
-- Houses and trees between the camera and the player turn see-through so you never lose your character
+- Walls between the camera and the player are cut away so you never lose your character
+- Optional free GLB models from Three.js Assets (see below)
 
 ## Controls
 
@@ -34,7 +38,15 @@ npm run build    # production build into dist/
 npm run preview  # serve the production build
 ```
 
-Handy for testing: URL parameters `?x=0&z=100&yaw=0.6&dist=22` set the starting position, camera angle and distance.
+Handy for testing: URL parameters `?x=0&z=100&yaw=0.6&dist=10` set the starting position, camera angle and distance.
+
+## Optional 3D models
+
+`src/models.js` loads GLB files from `public/models/` with `GLTFLoader` (plus `DRACOLoader`; the decoder lives in
+`public/draco/`). The models come from [Three.js Assets](https://threejsassets.com/) under their Free Commercial
+License, which does not allow redistributing the files, so they are **not committed**.
+`public/models/CREDITS.md` lists every file with its source page; download them there and drop them in the folder.
+Missing models fall back to procedural stand-ins, so the game always works without them.
 
 ## Deploying to GitHub Pages
 
@@ -52,7 +64,10 @@ src/
   physics.js     circle-vs-collider movement with sliding
   input.js       keyboard, mouse and touch joystick
   audio.js       Web Audio ambience and footsteps
-  materials.js   toon materials, faceted geometry helper, see-through cutout
+  materials.js   cel materials, planet curvature and see-through cutout shader patches, sign textures
+  post.js        ink outline post-processing
+  sky.js         painted sky dome
+  models.js      optional GLB models with procedural fallbacks
 ```
 
 `character.js` only exposes `root`, `animate()` and `height`, so the procedural

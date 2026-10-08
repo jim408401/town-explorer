@@ -1,8 +1,13 @@
+:root {
+  --ink: #1d2a2b;
+  --paper: #fbfaf3;
+  --accent: #c8463c;
+}
 html, body {
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background: #f6dcc0;
+  background: #7fd3c2;
   font-family: system-ui, -apple-system, "Noto Sans TC", "PingFang TC", sans-serif;
   touch-action: none;
   user-select: none;
@@ -10,18 +15,23 @@ html, body {
 }
 canvas { display: block; }
 
+/* Comic-panel style UI: paper white, thick ink borders, hard offset shadow */
+#hud, #mute, #prompt, #bubble, #talk {
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
 #hud {
   position: fixed;
   top: 16px;
   left: 16px;
   padding: 10px 14px;
-  border-radius: 14px;
-  background: rgba(255, 250, 240, 0.8);
-  color: #5a4637;
-  box-shadow: 0 4px 0 rgba(90, 70, 55, 0.12);
+  border-radius: 4px;
   pointer-events: none;
 }
-#hud h1 { margin: 0 0 4px; font-size: 18px; }
+#hud h1 { margin: 0 0 4px; font-size: 18px; letter-spacing: 0.08em; }
 #hud p { margin: 0; font-size: 13px; line-height: 1.6; }
 #hud .touch { display: none; }
 @media (pointer: coarse) {
@@ -33,15 +43,17 @@ canvas { display: block; }
   position: fixed;
   top: 16px;
   right: 16px;
-  width: 44px;
-  height: 44px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 250, 240, 0.85);
-  box-shadow: 0 4px 0 rgba(90, 70, 55, 0.12);
-  font-size: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
   cursor: pointer;
+  padding: 0;
 }
+#mute .cross { display: none; }
+#mute.off .cross { display: inline; }
+#mute.off .wave { display: none; }
 
 #prompt, #bubble {
   position: fixed;
@@ -50,47 +62,31 @@ canvas { display: block; }
   transform: translate(-50%, -100%);
   pointer-events: none;
   display: none;
-  color: #5a4637;
 }
 #prompt {
-  padding: 4px 10px;
-  border-radius: 10px;
-  background: rgba(255, 250, 240, 0.9);
+  padding: 3px 10px;
+  border-radius: 4px;
   font-size: 13px;
+  font-weight: bold;
 }
 #bubble {
-  max-width: 220px;
+  max-width: 230px;
   padding: 10px 14px;
-  border-radius: 16px;
-  background: #fffaf0;
-  box-shadow: 0 4px 0 rgba(90, 70, 55, 0.15);
+  border-radius: 14px;
   font-size: 15px;
   line-height: 1.5;
+  margin-top: -12px;
 }
-#bubble strong { display: block; font-size: 12px; color: #c0704f; }
-#bubble::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -8px;
-  margin-left: -8px;
-  border: 8px solid transparent;
-  border-bottom: none;
-  border-top-color: #fffaf0;
-}
+#bubble strong { display: block; font-size: 12px; color: var(--accent); }
 
 #talk {
   position: fixed;
   right: 24px;
   bottom: 32px;
-  padding: 14px 22px;
-  border: none;
-  border-radius: 999px;
-  background: #f28c6b;
-  color: white;
+  padding: 12px 22px;
+  border-radius: 4px;
   font-size: 16px;
   font-weight: bold;
-  box-shadow: 0 4px 0 rgba(90, 70, 55, 0.2);
   display: none;
 }
 
@@ -100,8 +96,8 @@ canvas { display: block; }
   height: 110px;
   margin: -55px 0 0 -55px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  border: 2px solid rgba(255, 255, 255, 0.75);
+  background: rgba(251, 250, 243, 0.35);
+  border: 3px solid var(--ink);
   display: none;
   pointer-events: none;
 }
@@ -111,7 +107,8 @@ canvas { display: block; }
   top: 50%;
   width: 44px;
   height: 44px;
-  margin: -22px 0 0 -22px;
+  margin: -25px 0 0 -25px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--paper);
+  border: 3px solid var(--ink);
 }

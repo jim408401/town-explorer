@@ -1,3 +1,7 @@
 node_modules
 dist
 .DS_Store
+
+# Third-party GLB models: licence forbids redistributing the files, keep them local
+public/models/*.glb
+public/models/*.gltf
